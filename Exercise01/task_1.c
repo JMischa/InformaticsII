@@ -53,6 +53,6 @@ void snippet6() {
 
 int main() {
     //The desired snippet can be called by modifying the next line
-    snippet1();
+    snippet6();
     return 0;
 }
