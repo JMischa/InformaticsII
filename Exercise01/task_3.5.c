@@ -1,7 +1,12 @@
 #include <stdio.h>
 
+void swap(int array[], int index1, int index2) {
+    int t = array[index2];
+    array[index2] = array[index1];
+    array[index1] = t;
+}
+
 void bubbleSort(int array[], int length) {
-    //Put your code here
     int counter = 0;
     for (int i = length - 1; i > 0; i--) {
         for (int j = 1; j <= i; j++) {
@@ -11,6 +16,7 @@ void bubbleSort(int array[], int length) {
             }
         }
     }
+    printf ("Counter: %d \n", counter);
 }
 
 int main() {
