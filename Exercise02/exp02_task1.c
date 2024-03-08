@@ -7,24 +7,23 @@
 */
 
 int isPalindrome(char X[], int i, int j) {
-    int length = strlen(X);
-    for (i = 0, j = length -1; i < j; i++, j--) {
-        if (X[i] != X[j]) {
-            return 0;
-        }
+    if (j<=i){
+        return 1;
     }
-    return 1;
+    if (X[i] != X[j]) {
+        return 0;
+    }
+    return isPalindrome(X, i+1, j-1);
 }
 
 
-int main() {
+int main(){
     char X[] = "1a_b3cD45t54Dc3b_a1";
-
+    // put your code here
     if (isPalindrome(X)) {
-        printf("This is a Palindrome.");
+        printf ("This is a Palindrom");
     }
-    else {
-        printf("This is not a Palindrome.");
+    if (isPalindrome(X) == 0) {
+        printf("This is not a palindrom %c:\n");
     }
-    return 0;
 }
