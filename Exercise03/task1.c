@@ -6,8 +6,12 @@ int A[100000000];
 
 int linear_search(int A[], int n, int t) {
     // write you code
-    
 
+    for(int i = 0; i < n; i++){
+        if(A[i] == t){
+            return 1;
+        }
+    }
     return 0; // not found
 }
 
@@ -26,7 +30,13 @@ int main() {
     printf("Enter an integer for t: \n");
     scanf("%d", &t); 
     start = clock();
-    linear_search(A, n, t); // your implementation
+    int index = linear_search(A, n, t); // your implementation
+    if(index == 1){
+        printf("Value is in the array at index: %d", index)
+    }
+    if(index == 0){
+        printf("Value is not in the array")
+    }
     end = clock();
     double run_time = ((double)(end - start))/(CLOCKS_PER_SEC/1000);
     printf("Linear search takes : %f millseconds\n", run_time); 
