@@ -48,7 +48,7 @@ int main() {
     start = clock();
     int index = linear_search(A, n, t); // your implementation
     if(index == 1){
-        printf("Value is in the array at index: %d", index);
+        printf("Value is in the array");
     }
     if(index == 0){
         printf("Value is not in the array");
