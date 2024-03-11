@@ -6,6 +6,7 @@ int A[100000000];
 
 int linear_search(int A[], int n, int t) {
     // write you code
+    
 
     return 0; // not found
 }
