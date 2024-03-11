@@ -50,7 +50,7 @@ int main() {
     if(index == 1){
         printf("Value is in the array");
     }
-    if(index == 0){
+    else{
         printf("Value is not in the array");
     }
     end = clock();
