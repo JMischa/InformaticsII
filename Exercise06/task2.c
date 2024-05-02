@@ -15,21 +15,89 @@ struct month {
 
 void print_months(struct month *head) {
     /* TODO: Implement task 2.(a) */
-    printf("Todo print months:\n");
+    printf("months: ");
+    struct month *p = head;
+    while( p != NULL){
+        printf("%s (%d), ", p -> month_name, p -> month_number);
+        p = p -> next;
+    }
+    printf("\n");
 }
 
-struct month *get_previous_month() {
+
+struct month *get_previous_month(struct month *head, struct month *a) {
     /* TODO: Implement task 2.(b) */
+    if (head == NULL || a == NULL){
     return NULL;
+    }
+    else if(head ->next == a){
+        return head;
+    }
+    struct month *p = head;
+    while(p ->next != a){
+        p = p ->next;
+    }
+    return p;
 }
 
 struct month *swap_month(struct month *head, struct month *a, struct month *b) {
     /* TODO: Implement task 2.(c) */
+    struct month *prev_a;
+    struct month *prev_b;
+    if(a == b){
+        return head;
+    }
+    else if(head == a){
+        if(a -> next == b){
+            a ->next = b ->next;
+            b -> next = a;
+        }
+        else{
+            struct month *tmp_a_next = a -> next;
+            prev_b = get_previous_month(head, b);
+            a -> next = b -> next;
+            b ->next = tmp_a_next;
+            prev_b -> next = a;
+        }
+        head = b;
+    }
+    else if(a->next == b){
+        prev_a = get_previous_month(head, a);
+        a ->next = b ->next;
+        b->next = a;
+        prev_a -> next = b;
+    }
+    else{
+       struct month *tmp_a_next = a->next;
+        prev_a = get_previous_month(head, a);
+        prev_b = get_previous_month(head, b);
+        prev_a->next = b;                     
+        a->next = b->next;
+        b->next = tmp_a_next;
+        prev_b->next = a;
+    }
     return head;
 }
 
 struct month *selection_sort(struct month *head) {
     /* TODO: Implement task 2.(d) */
+    struct month *i;
+    struct month *j;
+    struct month *k;
+    
+    i = head;
+    while(i != NULL){
+        k = i;
+        j = i ->next;
+        while(j != NULL){
+            if(j ->month_number < k ->month_number){
+                k = j;
+            }
+            j = j->next;
+        }
+        head = swap_month(head, i, k);
+        i = k ->next;
+    }
     return head;
 }
 
@@ -40,10 +108,11 @@ int main(int argc, char *argv[]) {
 
     /* Print the linked list as it is after initialization */
     print_months(head);
+    printf("\n");
 
     /* TODO: Task 2.(d): Goal is to implement the selection sort algorithm */
-    /* head = selection_sort(head); */
-    /* print_months(head); */
+    head = selection_sort(head);
+    print_months(head);
 
     /* Cleanup */
     free_months(head);
