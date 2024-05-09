@@ -115,7 +115,7 @@ struct TreeNode *mirror_image(struct TreeNode *root){
 int main(){
     struct TreeNode *root = NULL;
 
-    printf("Inserting: 8, 5, 9, 3, 7, 11, 4 sequentially\n");
+   printf("Inserting: 8, 5, 9, 3, 7, 11, 4 sequentially\n");
    insert(&root, 8);
    insert(&root, 5);
    insert(&root, 9);
