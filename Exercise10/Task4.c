@@ -27,7 +27,7 @@ int detectCycle(struct Node *l){
                 printf("cycle detected\n");
                 return 1;
             }
-            i++;
+            i = (i+1) % n;
         }
         T[i] = p -> val;
         p = p -> next;
