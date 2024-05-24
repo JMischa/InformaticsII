@@ -40,7 +40,7 @@ int cuckooInsert(int *T1, int *T2, int x){
     return -1;
 }
 
-int cuckooSearch(int *T1, int *T2, int x){
+void cuckooSearch(int *T1, int *T2, int x){
     if(T1[h1(x)] == x){
         printf("%d is in T1 at position: %d\n", x, h1(x));
     }

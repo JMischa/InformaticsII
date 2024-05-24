@@ -1,86 +1,58 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <limits.h>
 
-struct Node {
-    int val;
-    struct Node *next;
-};
-
-struct Node *new_stack() {
-    struct Node *new_stack = malloc(sizeof(struct Node));
-    new_stack->next = NULL;
-    return new_stack;
+// Function to find the maximum of three numbers
+int max(int a, int b, int c) {
+    if (a > b && a > c) return a;
+    if (b > a && b > c) return b;
+    return c;
 }
 
-bool is_empty(struct Node *S) {
-    return (S == NULL);
-}
+// Function to find the longest increasing path in a matrix
+int longest_path(int x, int y, int M[x][y]) {
+    int dp[x][y];
+    int max_length = 1;
 
-int pop(struct Node **S) {
-    if (is_empty(*S)) {
-        return -1;
-    }
-    int top_value = (*S)->val;
-
-    struct Node *temp = *S;
-    *S = (*S)->next;
-    free(temp);
-    return top_value;
-}
-
-void push(struct Node **S, int x) {
-    struct Node *new_node = malloc(sizeof(struct Node));
-    new_node->val = x;
-    new_node->next = *S;
-    *S = new_node;
-}
-
-int peek(struct Node *S) {
-    if (is_empty(S)) {
-        return INT_MIN;
-    }
-    return S->val;
-}
-
-void sort_stack(struct Node **S) {
-    struct Node *temp_stack = new_stack();
-
-    while (!is_empty(*S)) {
-        int temp = pop(S);
-        while (!is_empty(temp_stack) && peek(temp_stack) < temp) {
-            push(S, pop(&temp_stack));
+    // Initialize dp array with 1
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            dp[i][j] = 1;
         }
-        push(&temp_stack, temp);
     }
-    *S = temp_stack;
+
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            if (i > 0 && M[i][j] > M[i-1][j]) {
+                dp[i][j] = max(dp[i][j], dp[i-1][j] + 1, dp[i][j]);
+            }
+            if (j > 0 && M[i][j] > M[i][j-1]) {
+                dp[i][j] = max(dp[i][j], dp[i][j-1] + 1, dp[i][j]);
+            }
+            if (i > 0 && j > 0 && M[i][j] > M[i-1][j-1]) {
+                dp[i][j] = max(dp[i][j], dp[i-1][j-1] + 1, dp[i][j]);
+            }
+            if (i > 0 && j < y-1 && M[i][j] > M[i-1][j+1]) {
+                dp[i][j] = max(dp[i][j], dp[i-1][j+1] + 1, dp[i][j]);
+            }
+            if (dp[i][j] > max_length) {
+                max_length = dp[i][j];
+            }
+        }
+    }
+
+    return max_length;
 }
 
-void printStack(struct Node *S) {
-    while (S != NULL) {
-        printf("%d ", S->val);
-        S = S->next;
-    }
-    printf("\n");
-}
-
-// Driver program
 int main() {
-    struct Node *S = NULL;
-    push(&S, 30);
-    push(&S, -5);
-    push(&S, 18);
-    push(&S, 14);
-    push(&S, -3);
+    int M[4][6] = {
+        {1, 7, 3, 10, 6, 18},
+        {3, 2, 5, 6, 9, 16},
+        {6, 3, 2, 10, 12, 13},
+        {8, 7, 5, 4, 8, 15}
+    };
+    int x = 4;
+    int y = 6;
 
-    printf("Stack before sorting: ");
-    printStack(S);
-
-    sort_stack(&S);
-
-    printf("\nStack after sorting: ");
-    printStack(S);
+    printf("Longest increasing path in M is: %d\n", longest_path(x, y, M));
 
     return 0;
 }
