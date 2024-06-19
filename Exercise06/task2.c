@@ -63,9 +63,9 @@ struct month *swap_month(struct month *head, struct month *a, struct month *b) {
     }
     else if(a->next == b){
         prev_a = get_previous_month(head, a);
-        a ->next = b ->next;
-        b->next = a;
-        prev_a -> next = b;
+        prev_a ->next = b;
+        a ->next = b-> next;
+        b ->next = a;
     }
     else{
        struct month *tmp_a_next = a->next;

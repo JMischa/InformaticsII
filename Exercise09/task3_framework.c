@@ -131,5 +131,6 @@ int main() {
   printTree(root);
   root = rightRotate(root,4);
   printTree(root);
+  
   return 0;
 }

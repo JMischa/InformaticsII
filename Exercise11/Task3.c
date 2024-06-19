@@ -9,7 +9,6 @@ int max(int x, int y){
     return y;
 }
 
-
 int max_value(int n, int w[], int v[], int W){
     int dp[n+1][W+1];
 
@@ -37,7 +36,7 @@ int max_value(int n, int w[], int v[], int W){
 }
 
 int main() {
-    int n = 5, w[] = {0, 2, 4, 5, 3, 9}, v[] = {0, 3, 5, 8, 4, 10}, W = 20;
+    int n = 5, w[] = {0, 9, 4, 5, 3, 2}, v[] = {0, 9, 5, 8, 4, 2}, W = 20;
     printf("The max value is: %d", max_value(n, w, v, W));
     return 0;
 }
